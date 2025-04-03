@@ -13,7 +13,8 @@
   "runArgs": [
     "--runtime=nvidia",
     "--gpus=all",
-    "--network", "host"
+    "--network", "host",
+    "--shm-size=20gb",
   ],
 
   "features": {
