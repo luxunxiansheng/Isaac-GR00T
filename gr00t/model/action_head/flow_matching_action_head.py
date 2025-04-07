@@ -308,11 +308,11 @@ class FlowmatchingActionHead(nn.Module):
             timestep=t_discretized,
         )
         pred = self.action_decoder(model_output, embodiment_id)
-        pred_actions = pred[:, -actions.shape[1] :]
+        pred_velocity = pred[:, -actions.shape[1] :]
 
         # Slice out only the action portion of pred and target.
         action_mask = action_input.action_mask
-        loss = F.mse_loss(pred_actions, velocity, reduction="none") * action_mask
+        loss = F.mse_loss(pred_velocity, velocity, reduction="none") * action_mask
         loss = loss.sum() / action_mask.sum()
         output_dict = {
             "loss": loss,
